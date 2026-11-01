@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "hooks": {
+    "beforeSubmitPrompt": [
+      {
+        "command": "node .cursor/hooks/recordar-readme.js"
+      }
+    ],
+    "stop": [
+      {
+        "command": "node .cursor/hooks/verificar-readme.js",
+        "loop_limit": 1
+      }
+    ]
+  }
+}

@@ -1,0 +1,15 @@
+---
+description: Recordatorio permanente — si el prompt cambia código, actualizar README.md en el mismo turno.
+alwaysApply: true
+---
+
+# README en cada cambio de código
+
+Si este prompt crea, modifica o borra código, configuración de la app, UI, Excel, roles o el agente Foundry:
+
+1. Aplica la skill `documentar-readme`.
+2. Actualiza `README.md` en este mismo turno: qué hace, cómo funciona, fila en Registro de cambios.
+3. Si hay UI visible nueva, añade imagen en `docs/imagenes/` y enlázala.
+4. No termines el turno con código nuevo y README desactualizado.
+
+Si el usuario solo pregunta y no hay cambios de código, no toques el README.

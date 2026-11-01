@@ -1,0 +1,20 @@
+{
+  "name": "proyectoia",
+  "version": "1.0.0",
+  "description": "Prototipo Río Claro: login por roles, chat y módulos",
+  "license": "ISC",
+  "author": "Cristian Hernandez Vazquez",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "dependencies": {
+    "@azure/ai-projects": "^2.9.0",
+    "@azure/identity": "^4.14.1",
+    "cors": "^2.8.6",
+    "express": "^5.3.0"
+  }
+}

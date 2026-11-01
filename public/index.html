@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Esmeralda — acceso</title>
+  <link rel="stylesheet" href="/css/estilos.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+</head>
+<body>
+  <noscript>
+    <p class="sin-js">Esta aplicación necesita JavaScript para el acceso, la sesión y el chat.</p>
+  </noscript>
+
+  <main id="pantalla-login" class="login-entrada-refresh">
+    <p id="login-toast" class="login-toast" role="status" hidden></p>
+    <div class="login-contenedor">
+      <header class="login-marca marca">
+        <span class="marca-icono" aria-hidden="true"></span>
+        <div>
+          <p class="marca-nombre">Esmeralda</p>
+          <p class="marca-giro">Limpieza e higiene</p>
+        </div>
+      </header>
+
+      <section class="login-panel">
+        <div id="login-vistas" class="login-vistas">
+          <h1 id="login-titulo">Acceso al asistente</h1>
+
+          <form id="form-entrar" class="formulario">
+            <label>
+              Usuario
+              <input id="entrar-nombre" name="nombre" autocomplete="username" maxlength="40" required>
+            </label>
+            <label>
+              Contraseña
+              <input id="entrar-clave" name="clave" type="password" autocomplete="current-password" minlength="4" maxlength="80" required>
+            </label>
+            <p id="entrar-error" class="aviso-error" role="alert"></p>
+            <button type="submit">Entrar</button>
+          </form>
+
+          <p id="login-enlaces-entrar" class="login-enlaces">
+            <button type="button" id="link-olvidar" class="enlace-login">¿Olvidó la contraseña?</button>
+            <button type="button" id="link-registrar" class="enlace-login">¿Desea registrar a un nuevo usuario?</button>
+          </p>
+
+          <form id="form-restablecer" class="formulario" hidden>
+            <label>
+              Usuario
+              <input id="restablecer-nombre" name="nombre" autocomplete="username" maxlength="40" required>
+            </label>
+            <label>
+              Nueva contraseña
+              <input id="restablecer-clave" name="clave" type="password" autocomplete="new-password" minlength="4" maxlength="80" required>
+            </label>
+            <p id="restablecer-error" class="aviso-error" role="alert"></p>
+            <button type="submit">Restablecer contraseña</button>
+          </form>
+
+          <form id="form-registrar" class="formulario" hidden>
+            <label>
+              Usuario
+              <input id="registrar-nombre" name="nombre" autocomplete="username" maxlength="40" required>
+            </label>
+            <label>
+              Contraseña
+              <input id="registrar-clave" name="clave" type="password" autocomplete="new-password" minlength="4" maxlength="80" required>
+            </label>
+            <label>
+              Rol
+              <select id="registrar-rol" name="rol" required>
+                <option value="">Elige un rol</option>
+              </select>
+            </label>
+            <p id="registrar-error" class="aviso-error" role="alert"></p>
+            <button type="submit">Registrar y entrar</button>
+          </form>
+
+          <p id="login-enlace-volver" class="login-enlaces" hidden>
+            <button type="button" id="link-volver" class="enlace-login">Volver al acceso</button>
+          </p>
+        </div>
+
+        <div id="modal-autorizacion-registro" class="modal-login" hidden>
+          <div class="modal-login-fondo" id="modal-autorizacion-fondo" aria-hidden="true"></div>
+          <div
+            class="modal-login-panel"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="modal-autorizacion-titulo"
+            aria-describedby="modal-autorizacion-texto"
+          >
+            <h2 id="modal-autorizacion-titulo">Registrar nuevo usuario</h2>
+            <p id="modal-autorizacion-texto">Introduce la contraseña para registrar nuevos usuarios.</p>
+            <form id="form-autorizacion-registro" class="formulario">
+              <label>
+                Contraseña para registrar
+                <input id="modal-autorizacion-clave" name="autorizacion" type="password" autocomplete="off" maxlength="40" required>
+              </label>
+              <p id="modal-autorizacion-error" class="aviso-error" role="alert"></p>
+              <div class="modal-login-acciones">
+                <button type="button" id="modal-autorizacion-cancelar" class="secundario">Cancelar</button>
+                <button type="submit">Continuar</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <main id="pantalla-principal" hidden>
+    <p id="app-toast" class="login-toast" role="status" hidden></p>
+    <header class="barra">
+      <div class="marca marca-compacta">
+        <span class="marca-icono" aria-hidden="true"></span>
+        <p class="marca-nombre">Esmeralda</p>
+      </div>
+      <div class="barra-sesion">
+        <p class="sesion-linea">
+          <span id="sesion-nombre"></span>
+          <span id="sesion-rol" class="insignia"></span>
+        </p>
+        <button type="button" id="btn-salir" class="secundario">Salir</button>
+      </div>
+    </header>
+
+    <div id="layout-principal" class="layout-principal">
+      <aside id="panel-historial" class="panel-historial" aria-label="Tu historial de conversaciones">
+        <header class="historial-encabezado">
+          <div class="historial-encabezado-fila">
+            <h2>Tu historial</h2>
+            <button
+              type="button"
+              id="btn-ocultar-historial"
+              class="btn-icono-historial"
+              aria-label="Ocultar historial"
+              title="Ocultar historial"
+            >
+              <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
+            </button>
+          </div>
+          <button type="button" id="btn-nueva-conversacion" class="secundario ancho-completo">Nueva conversación</button>
+        </header>
+        <p id="historial-vacio" class="historial-vacio" hidden>Aún no guardaste conversaciones. Escribe al asistente y aparecerán aquí.</p>
+        <ul id="lista-historial" class="lista-historial"></ul>
+      </aside>
+
+      <div class="espacio">
+      <section class="chat" aria-label="Chat con el asistente">
+        <header class="bloque-encabezado">
+          <h2>Esmeralda</h2>
+        </header>
+        <div id="lista-mensajes" class="mensajes" aria-live="polite"></div>
+        <form id="form-chat" class="chat-form">
+          <label class="sr-solo" for="chat-texto">Mensaje</label>
+          <div class="chat-form-campo">
+            <input id="chat-texto" name="mensaje" maxlength="2000" placeholder="Escribe tu pregunta" autocomplete="off">
+            <button
+              type="button"
+              id="btn-dictado"
+              class="btn-dictado"
+              aria-label="Dictar mensaje con voz"
+              aria-pressed="false"
+              title="Dictar con voz"
+            >
+              <i class="fa-solid fa-microphone" aria-hidden="true"></i>
+              <span class="btn-dictado-ondas" aria-hidden="true"></span>
+            </button>
+          </div>
+          <button type="submit">Enviar</button>
+        </form>
+        <p id="chat-error" class="aviso-error" role="alert"></p>
+      </section>
+      </div>
+
+      <button
+        type="button"
+        id="btn-mostrar-historial"
+        class="btn-flotante-historial"
+        aria-label="Mostrar historial"
+        title="Mostrar historial"
+        aria-controls="panel-historial"
+        aria-expanded="true"
+        hidden
+      >
+        <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+      </button>
+    </div>
+
+    <button
+      type="button"
+      id="btn-estadisticas"
+      class="btn-flotante-estadisticas"
+      aria-label="Estadísticas de empleados"
+      title="Estadísticas de empleados"
+      hidden
+    >
+      <i class="fa-solid fa-chart-column" aria-hidden="true"></i>
+    </button>
+  </main>
+
+  <div id="panel-estadisticas" class="panel-estadisticas" hidden>
+    <div class="panel-estadisticas-fondo" id="panel-estadisticas-fondo" aria-hidden="true"></div>
+    <section
+      class="panel-estadisticas-tarjeta"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="estadisticas-titulo"
+    >
+      <header class="panel-estadisticas-encabezado">
+        <div>
+          <h2 id="estadisticas-titulo">Estadísticas de empleados</h2>
+          <p class="panel-estadisticas-subtitulo">Uso de Esmeralda registrado en este navegador.</p>
+        </div>
+        <button type="button" id="btn-cerrar-estadisticas" class="secundario" aria-label="Cerrar estadísticas">Cerrar</button>
+      </header>
+      <div class="estadisticas-filtro" id="estadisticas-filtro">
+        <p class="estadisticas-filtro-titulo">Periodo</p>
+        <div class="estadisticas-filtro-presets" role="group" aria-label="Atajos de periodo">
+          <button type="button" id="filtro-est-hoy" data-preset="hoy">Hoy</button>
+          <button type="button" id="filtro-est-7" data-preset="7">Últimos 7 días</button>
+          <button type="button" id="filtro-est-28" data-preset="28">Últimos 28 días</button>
+          <button type="button" id="filtro-est-personalizado" data-preset="personalizado">Personalizado</button>
+        </div>
+        <div class="estadisticas-filtro-rango">
+          <label>
+            Desde
+            <input id="estadisticas-desde" type="date" required>
+          </label>
+          <label>
+            Hasta
+            <input id="estadisticas-hasta" type="date" required>
+          </label>
+        </div>
+      </div>
+      <div id="estadisticas-cuerpo" class="estadisticas-cuerpo"></div>
+    </section>
+  </div>
+
+  <div id="muro-esmeraldas" class="muro-esmeraldas" hidden aria-hidden="true">
+    <canvas id="muro-esmeraldas-lienzo"></canvas>
+    <p class="sr-solo" id="muro-esmeraldas-aviso">Acceso correcto. Abriendo el asistente.</p>
+  </div>
+
+  <script src="/js/muro-esmeraldas.js" defer></script>
+  <script src="/js/app.js" defer></script>
+</body>
+</html>
