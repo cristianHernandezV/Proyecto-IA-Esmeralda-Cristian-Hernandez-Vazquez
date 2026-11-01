@@ -4,6 +4,9 @@ Prototipo web para **Distribuidora Río Claro** (limpieza e higiene, 22 años, 1
 
 Hoy el prototipo ya abre: login, registro con rol y la pantalla principal con **solo el chat del asistente**. Facturas, pedidos, ventas y quejas se consultan por el chat (conteos en `localStorage`); la captura en formularios llega después. El chat llama a `POST /api/asistente`: si en `.env` están `FOUNDRY_PROJECT_ENDPOINT` y `FOUNDRY_AGENT_NAME`, **todos los roles de la app** (por defecto `super`, `contador`, `cliente`, `empleado`, `supervisor`) hablan con el **asistente empresarial** de Microsoft Foundry; el agente aplica permisos según el bloque `[CONTEXTO SESIÓN]` que envía el servidor. Los roles excluidos en `FOUNDRY_ROLES` siguen con respuesta local de respaldo.
 
+La contarseña para registrar usuarios es:
+ff18-zas2-210a-09op
+
 ## Alcance principal
 
 Lo primero que existe, antes de capturar facturas o reportes:
